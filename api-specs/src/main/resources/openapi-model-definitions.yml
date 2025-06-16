@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: Inditex Test Price API Model
+  version: 1.0.0
+components:
+  schemas:
+    PriceRequest:
+      type: object
+      required:
+        - productId
+        - brandId
+        - requestDate
+      properties:
+        productId:
+          type: integer
+          format: int64
+          description: Numeric Id of the product
+        brandId:
+          type: integer
+          format: int64
+          description: Numeric Id of the brand
+        requestDate:
+          type: string
+          format: date-time
+          description: Requested date/time
+    PriceResponse:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+        brandId:
+          type: integer
+          format: int64
+        rate:
+          type: integer
+          format: int32
+        startDate:
+          type: string
+          format: date-time
+          description: Requested date/time
+        endDate:
+          type: string
+          format: date-time
+          description: Requested date/time
+        price:
+          type: number
+          format: double
+        currency:
+          type: string

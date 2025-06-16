@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.inditex</groupId>
+        <artifactId>test-prices</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>api-specs</artifactId>
+    <version>${revision}</version>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.swagger.parser.v3/swagger-parser-v3 -->
+        <dependency>
+            <groupId>io.swagger.parser.v3</groupId>
+            <artifactId>swagger-parser</artifactId>
+            <version>2.1.22</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openapitools/jackson-databind-nullable -->
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.5.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/openapi-api-definitions.yml
+                            </inputSpec>
+                            <generatorName>spring</generatorName>
+                            <apiPackage>com.inditex.api.ports</apiPackage>
+                            <modelPackage>com.inditex.api.model</modelPackage>
+                            <modelNameSuffix>Dto</modelNameSuffix>
+                            <apiNameSuffix>Api</apiNameSuffix>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <configOptions>
+                                <serializationLibrary>jackson</serializationLibrary>
+                                <interfaceOnly>true</interfaceOnly>
+                                <delegatePattern>false</delegatePattern>
+                                <serviceInterface>true</serviceInterface>
+                                <serviceImplementation>false</serviceImplementation>
+                                <useSwaggerAnnotations>true</useSwaggerAnnotations>
+                                <generateSupportingFiles>false</generateSupportingFiles>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                                <useJakartaEe>true</useJakartaEe>
+                            </configOptions>
+                            <typeMappings>
+                                <typeMapping>double=java.math.BigDecimal</typeMapping>
+                            </typeMappings>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Inditex Test Price API
+  version: 1.0.0
+paths:
+  /price:
+    get:
+      summary: Get Price By Product Id and Brand Id given a Requested Date
+      operationId: getPrice
+      tags:
+        - Prices Operations
+      parameters:
+        - in: query
+          name: priceRequest
+          schema:
+            type: object
+            $ref: 'openapi-model-definitions.yml#/components/schemas/PriceRequest'
+          required: true
+          description: Price Request Query params
+
+      responses:
+        '200' :
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: 'openapi-model-definitions.yml#/components/schemas/PriceResponse'
+        '404':
+          description: Price not found
